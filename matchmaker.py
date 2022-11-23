@@ -18,26 +18,30 @@ def matchAll():
         wordList = AvalaraDict[key]
         iter = UNSPSC_tree
         maxCount = 0
+
         while not isinstance(iter, UNSPSC_structure.UNSPSC_Commodity):
             maxCount = 0
             childIndex = -1
             maxChildIndex = float('inf')
-            for child in iter.childList:
+
+            for child in iter.childList: # for every child node under current node
                 childIndex += 1
                 currCount = 0
                 comparatorList = child.definition
-                comparatorList.append(child.title)
+                comparatorList.append(child.title) # create list including words in title and definition
                 for word in wordList:
                     for comparator in comparatorList:
                         if word == comparator:
                             currCount += 1
-                if currCount > maxCount:
+                if currCount > maxCount: # update max count and max child index
                     maxCount = currCount
                     maxChildIndex = childIndex
-            if maxCount == 0:
+
+            if maxCount == 0: # if no matches in any child node, skip Ava item
                 break
-            else:
+            else: # else, move down subtree with most matches
                 iter = iter.childList[maxChildIndex]
+
         if maxCount > 0:
             matchSolution.resultsDict[key].extend([iter.key, iter.id, iter.title])
             numOfMatches += 1
