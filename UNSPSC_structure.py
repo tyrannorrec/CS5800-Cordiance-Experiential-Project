@@ -6,14 +6,14 @@ import time
 # Object represents tree structure holding all UNSPSC data.
 # Hierarchy: UNSPSC_Tree -> UNSPSC_Segment -> UNSPSC_Family -> UNSPSC_Class -> UNSPSC_Commodity
 # Attributes: df          -- Pandas data frame containing information read from excel file
-#             segmentList -- list of UNSPSC_Segment objects in tree
+#             childList   -- list of UNSPSC_Segment objects in tree
 class UNSPSC_Tree:
 
     # Class initializer. Builds tree and prints time taken to build.
     def __init__(self, inDataFrame):
 
         self.df = inDataFrame
-        self.segmentList = []
+        self.childList = []
 
         print('>> Building UNSPSC tree...')
         start = time.time()
@@ -40,7 +40,7 @@ class UNSPSC_Tree:
                 currSegment = UNSPSC_Segment(self.df['Segment'][i], 
                 getWordList(self.df['Segment Title'][i]), 
                 getWordList(self.df['Segment Definition'][i]))
-                self.segmentList.append(currSegment) # append to UNSPSC tree's segment list
+                self.childList.append(currSegment) # append to UNSPSC tree's segment list
                 currSegmentID = self.df['Segment'][i] # update curr segment ID
 
             else: # if segment already exists
@@ -49,7 +49,7 @@ class UNSPSC_Tree:
                     currFamily = UNSPSC_Family(self.df['Family'][i], 
                     getWordList(self.df['Family Title'][i]), 
                     getWordList(self.df['Family Definition'][i]))
-                    currSegment.familyList.append(currFamily) # append to curr segment's family list
+                    currSegment.childList.append(currFamily) # append to curr segment's family list
                     currFamilyID = self.df['Family'][i] # update curr family ID
 
                 else: # if family already exists
@@ -58,7 +58,7 @@ class UNSPSC_Tree:
                         currClass = UNSPSC_Class(self.df['Class'][i],
                         getWordList(self.df['Class Title'][i]), 
                         getWordList(self.df['Class Definition'][i]))
-                        currFamily.classList.append(currClass) # append to curr family's class list
+                        currFamily.childList.append(currClass) # append to curr family's class list
                         currClassID = self.df['Class'][i] # update curr class ID
 
                     else: # if class already exists
@@ -66,7 +66,7 @@ class UNSPSC_Tree:
                         currCommodity = UNSPSC_Commodity(self.df['Key'][i], self.df['Commodity'][i],
                         getWordList(self.df['Commodity Title'][i]), 
                         getWordList(self.df['Definition'][i]))
-                        currClass.commodityList.append(currCommodity) # append to curr class's commodity list
+                        currClass.childList.append(currCommodity) # append to curr class's commodity list
 
     # Print function for testing.
     def printAll(self):
@@ -87,14 +87,14 @@ class UNSPSC_Tree:
 # Attributes: id          -- ID number of Segment (int)
 #             title       -- list of words in name of Segment (list of str)
 #             definition  -- list of words in description of Segment (list of str)
-#             familyList  -- list of UNSPSC_Segment objects in tree
+#             childList   -- list of UNSPSC_Segment objects in tree
 class UNSPSC_Segment:
 
     def __init__(self, inID, inTitle, inDef):
         self.id = int(inID)
         self.title = inTitle
         self.definition = inDef
-        self.familyList = []
+        self.childList = []
 
 # ------------------------------------------------------------------------------------------------#
 
@@ -103,14 +103,14 @@ class UNSPSC_Segment:
 # Attributes: id          -- ID number of Family (int)
 #             title       -- list of words in name of Family (list of str)
 #             definition  -- list of words in description of Family (list of str)
-#             classList   -- list of UNSPSC_Class objects in Segment
+#             childList   -- list of UNSPSC_Class objects in Segment
 class UNSPSC_Family:
 
     def __init__(self, inID, inTitle, inDef):
         self.id = int(inID)
         self.title = inTitle
         self.definition = inDef
-        self.classList = []
+        self.childList = []
 
 # ------------------------------------------------------------------------------------------------#
 
@@ -119,14 +119,14 @@ class UNSPSC_Family:
 # Attributes: id          -- ID number of Class (int)
 #             title       -- list of words in name of Class (list of str)
 #             definition  -- list of words in description of Class (list of str)
-#             commodityList -- list of UNSPSC_Commodity objects in Class
+#             childList   -- list of UNSPSC_Commodity objects in Class
 class UNSPSC_Class:
 
     def __init__(self, inID, inTitle, inDef):
         self.id = int(inID)
         self.title = inTitle
         self.definition = inDef
-        self.commodityList = []
+        self.childList = []
 
 # ------------------------------------------------------------------------------------------------#
 
