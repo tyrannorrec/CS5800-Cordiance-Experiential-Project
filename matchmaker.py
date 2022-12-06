@@ -1,15 +1,17 @@
 import Avalara_structure
-import UNSPSC_structure
+import UNSPSC_structure_OLD
 import time
 
-UNSPSC_tree = UNSPSC_structure.getTree()
+UNSPSC_tree = UNSPSC_structure_OLD.getTree()
 Avalara_utility = Avalara_structure.ReadFile()
 Avalara_utility.read()
 AvalaraDict, matchSolution = Avalara_utility.dict, Avalara_utility.solution
 
 def matchAll():
 
+    numOfCommMatches = 0
     numOfMatches = 0
+    numOfFails = 0
 
     print('>> Beginning matching...')
     start = time.time()
@@ -19,7 +21,7 @@ def matchAll():
         iter = UNSPSC_tree
         maxCount = 0
 
-        while not isinstance(iter, UNSPSC_structure.UNSPSC_Commodity):
+        while not isinstance(iter, UNSPSC_structure_OLD.UNSPSC_Commodity):
             maxCount = 0
             childIndex = -1
             maxChildIndex = float('inf')
@@ -37,17 +39,24 @@ def matchAll():
                     maxCount = currCount
                     maxChildIndex = childIndex
 
-            if maxCount == 0: # if no matches in any child node, skip Ava item
+            if maxCount == 0: # if no matches in any child node, break
                 break
             else: # else, move down subtree with most matches
                 iter = iter.childList[maxChildIndex]
 
         if maxCount > 0:
             matchSolution.resultsDict[key].extend([iter.key, iter.id, iter.title])
+            numOfCommMatches += 1
+        elif isinstance(iter, UNSPSC_structure_OLD.UNSPSC_Tree):
+            numOfFails += 1
+        else:
+            matchSolution.resultsDict[key].extend([iter.id, iter.title])
             numOfMatches += 1
 
     print('>>>> Matching complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
-    print('>>>> %d matches made.\n' % numOfMatches)
+    print('>>>> %d matches at the commodity level made.\n' % numOfCommMatches)
+    print('>>>> %d matches at other levels made.\n' % numOfMatches)
+    print('>>>> %d matches failed at the highest level.\n' % numOfFails)
 
 def main():
 
