@@ -1,8 +1,8 @@
 import Avalara_structure
-import UNSPSC_structure_OLD
+import UNSPSC_structure_tree
 import time
 
-UNSPSC_tree = UNSPSC_structure_OLD.getTree()
+UNSPSC_tree = UNSPSC_structure_tree.getTree()
 Avalara_utility = Avalara_structure.ReadFile()
 Avalara_utility.read()
 AvalaraDict, matchSolution = Avalara_utility.dict, Avalara_utility.solution
@@ -21,7 +21,7 @@ def matchAll():
         iter = UNSPSC_tree
         maxCount = 0
 
-        while not isinstance(iter, UNSPSC_structure_OLD.UNSPSC_Commodity):
+        while not isinstance(iter, UNSPSC_structure_tree.UNSPSC_Commodity):
             maxCount = 0
             childIndex = -1
             maxChildIndex = float('inf')
@@ -47,7 +47,7 @@ def matchAll():
         if maxCount > 0:
             matchSolution.resultsDict[key].extend([iter.key, iter.id, iter.title])
             numOfCommMatches += 1
-        elif isinstance(iter, UNSPSC_structure_OLD.UNSPSC_Tree):
+        elif isinstance(iter, UNSPSC_structure_tree.UNSPSC_Tree):
             numOfFails += 1
         else:
             matchSolution.resultsDict[key].extend([iter.id, iter.title])
