@@ -9,10 +9,8 @@ class ReadFile:
     # initialize a map to store the taxid and its corresponding valid key words
     def __init__(self):
         self.dict = {}
-
         # self.manual_display()
         self.read()
-
 
     # interactive display interface
     def manual_display(self):
@@ -53,7 +51,7 @@ class ReadFile:
         x = os.listdir('./')
         available_file_input = {}
         
-        count = 1
+        count = 1;
         for file in x:
             if file.endswith('.xlsx') and file[0].isalpha:
                 available_file_input[count] = file
@@ -87,18 +85,12 @@ class ReadFile:
             self.peek()
 
     # Read the input file and print the ds
-
-    def read(self):   
-            
-        print('>> Converting Avalara file to data frame...')
+    def read(self):
         start = time.time()
         df_ava = pd.read_excel('Avalara_goods_and_services.xlsx', 
                     'goods_and_services',
                     skiprows=1)
-        print('>>>> Conversion complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
 
-        print('>> Building Avalara hash map...')
-        start = time.time()
         build_map = Avalara_Listings(df_ava)
 
         self.dict = build_map.build()
@@ -106,17 +98,13 @@ class ReadFile:
         end = time.time()
         print(f"{round(end - start, 2)} secs")
 
-
     # Write to a csv file with all map information
     def write(self):
         print("Write successfully.\n")
     # print function to print the self.dict line by line
     def print(self):
-        f = open("ava_output.txt", "a")
         for k,v in self.dict.items():
-            f.write(str(k) + ':' + str(v) + '\n')
             print(f"{k}: {v}")
-        f.close()
 
 
 # Init data structure, not fully implemented yet
@@ -134,13 +122,11 @@ class Avalara_Listings:
 
         # going through the avalara file line by line, pre-filter the keywords in description by length of 3
         # convert to case insensitive strings
-
-        parent_category_tax_list = []
-        parent_additional_tax_list = []
-
+        previous_tax_list = []
+        previous_additional_tax_list = []
         for i in self.df.index:
-            # if i > 35:
-            #     break
+            if i > 13:
+                break
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
             if tax_code_col[-1] > '9' or tax_code_col[-1] < '0': # Skip invalid tax code
@@ -148,7 +134,6 @@ class Avalara_Listings:
 
             tax_code_description = str(self.df['AvaTax System Tax Code Description'][i]).lower()
             additional_tax_code_infomation = str(self.df['Additional AvaTax System Tax Code Information'][i]).lower()
-
 
             curr_tax_list = []
             s = re.findall(r'\w+', tax_code_description) # regex expression to ignore any ascii values are not words
@@ -168,29 +153,26 @@ class Avalara_Listings:
                         curr_additional_word_list.append(word)
                     else:
                         continue
-
-            if i == 1: # special case (first parent category of tax code description)
-                parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-
-            flag = 0 # flag used to determine whether all words in parent category present in the current listing description
-            if (all(x in curr_tax_list for x in parent_category_tax_list)):
-                flag = 1
-
-            if flag == 1: # current listing belongs to the current parent category
-                total_word_list = curr_tax_list + curr_additional_word_list + parent_additional_tax_list
-            else: # start to a new parent category
-                parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-                total_word_list = parent_category_tax_list + parent_additional_tax_list
+            try:
+                if len(set(curr_tax_list) - set(previous_tax_list))/len(curr_tax_list) <= 0.25: # comparing the length of previous listing and the current listing, set the ratio threshold to be 0.25
+                                                                                    # meaning if there are 75% matching, it's considered to be similar listing
+                                                                                    # The comparing would terminate if found
+                    previous_tax_list = curr_tax_list
+                    previous_additional_tax_list = curr_additional_word_list
+                    new_total_word_list = curr_tax_list + previous_additional_tax_list + curr_additional_word_list
+                    # print(f"{word_list} and {previous_list} are similar....")
+                else:    
+                    previous_tax_list = curr_tax_list
+                    previous_additional_tax_list = curr_additional_word_list
+                    new_total_word_list = curr_tax_list + curr_additional_word_list
+            except:
+                print("Current listings is not well documented.")
                 
-            self.map_ID_Keywords[tax_code_col] = total_word_list # add the valid listing to the map
+            self.map_ID_Keywords[tax_code_col] = new_total_word_list # add the valid listing to the map
 
             # if i > 5:
-
             #     return self.map_ID_Keywords
         return self.map_ID_Keywords
-
 
             # TODO: implement ds to store all information of each listing
 
@@ -219,29 +201,6 @@ class sub_category():
     def __init__(self):
         pass
 
-
-class MatchResults:
-
-    def __init__(self):
-        self.resultsDict = {}
-
-    def add(self, inAvaID, inAvaTitle):
-        self.resultsDict[inAvaID] = [inAvaTitle]
-
-    def print(self):
-        for key in self.resultsDict:
-            print(key, '\t', self.resultsDict[key])
-
-    def writeToFile(self):
-        with open('/Users/norrecnieh/Documents/Align/CS5800/CS5800-Cordiance-Experiential-Project/results.txt', 'w') as fileHandle:
-            for key in self.resultsDict:
-                fileHandle.write(key)
-                fileHandle.write('\t')
-                for item in self.resultsDict[key]:
-                    fileHandle.write(str(item))
-                    fileHandle.write('\t')
-                fileHandle.write('\n')
-        fileHandle.close()
 
 def main():
     ReadFile()
