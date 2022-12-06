@@ -103,11 +103,8 @@ class ReadFile:
         print("Write successfully.\n")
     # print function to print the self.dict line by line
     def print(self):
-        f = open("ava_output.txt", "a")
         for k,v in self.dict.items():
-            f.write(str(k) + ':' + str(v) + '\n')
             print(f"{k}: {v}")
-        f.close()
 
 
 # Init data structure, not fully implemented yet
@@ -125,11 +122,11 @@ class Avalara_Listings:
 
         # going through the avalara file line by line, pre-filter the keywords in description by length of 3
         # convert to case insensitive strings
-        parent_category_tax_list = []
-        parent_additional_tax_list = []
+        previous_tax_list = []
+        previous_additional_tax_list = []
         for i in self.df.index:
-            # if i > 35:
-            #     break
+            if i > 13:
+                break
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
             if tax_code_col[-1] > '9' or tax_code_col[-1] < '0': # Skip invalid tax code
@@ -156,23 +153,22 @@ class Avalara_Listings:
                         curr_additional_word_list.append(word)
                     else:
                         continue
-
-            if i == 1: # special case (first parent category of tax code description)
-                parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-
-            flag = 0 # flag used to determine whether all words in parent category present in the current listing description
-            if (all(x in curr_tax_list for x in parent_category_tax_list)):
-                flag = 1
-
-            if flag == 1: # current listing belongs to the current parent category
-                total_word_list = curr_tax_list + curr_additional_word_list + parent_additional_tax_list
-            else: # start to a new parent category
-                parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-                total_word_list = parent_category_tax_list + parent_additional_tax_list
+            try:
+                if len(set(curr_tax_list) - set(previous_tax_list))/len(curr_tax_list) <= 0.25: # comparing the length of previous listing and the current listing, set the ratio threshold to be 0.25
+                                                                                    # meaning if there are 75% matching, it's considered to be similar listing
+                                                                                    # The comparing would terminate if found
+                    previous_tax_list = curr_tax_list
+                    previous_additional_tax_list = curr_additional_word_list
+                    new_total_word_list = curr_tax_list + previous_additional_tax_list + curr_additional_word_list
+                    # print(f"{word_list} and {previous_list} are similar....")
+                else:    
+                    previous_tax_list = curr_tax_list
+                    previous_additional_tax_list = curr_additional_word_list
+                    new_total_word_list = curr_tax_list + curr_additional_word_list
+            except:
+                print("Current listings is not well documented.")
                 
-            self.map_ID_Keywords[tax_code_col] = total_word_list # add the valid listing to the map
+            self.map_ID_Keywords[tax_code_col] = new_total_word_list # add the valid listing to the map
 
             # if i > 5:
             #     return self.map_ID_Keywords
