@@ -25,6 +25,15 @@ class UNSPSC_Dict:
             else:
                 return ''
 
+        # Sorts string as list of words and returns as string.
+        def sortStringLex(inStr):
+            strDataList = strData.split()
+            strDataList.sort()
+            strData = ''
+            for word in strDataList:
+                strData = strData + ' ' + word
+            return strData
+
         # Extracts all text elements for item in UNSPSC file and outputs a string representing that item for hashing
         def getStringData(i):
             
@@ -37,7 +46,7 @@ class UNSPSC_Dict:
                             lowerStr(self.df['Family Title'][i]) + ' ' + 
                             lowerStr(self.df['Class Title'][i]) + ' ' +
                             lowerStr(self.df['Commodity Title'][i]))                
-            return strData
+            return sortStringLex(strData)
 
         # For each item in UNSPSC file, add item to dictionary where key = commodity ID and value = hash string for item
         for i in self.df.index:
