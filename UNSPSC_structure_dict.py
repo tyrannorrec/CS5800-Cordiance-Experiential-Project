@@ -29,10 +29,14 @@ class UNSPSC_Dict:
         def getStringData(i):
             
             strData = ''
-            strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
-                            lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
-                            lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
-                            lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
+            # strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
+            #                 lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
+            #                 lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
+            #                 lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
+            strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + 
+                            lowerStr(self.df['Family Title'][i]) + ' ' + 
+                            lowerStr(self.df['Class Title'][i]) + ' ' +
+                            lowerStr(self.df['Commodity Title'][i]))                
             return strData
 
         # For each item in UNSPSC file, add item to dictionary where key = commodity ID and value = hash string for item
@@ -41,7 +45,7 @@ class UNSPSC_Dict:
             strData = getStringData(i)
             self.data[commodityID] = strData
 
-    def printHashmap(self):
+    def printDictionary(self):
 
         for key in self.data:
             print(key, '\t', self.data[key], '\n')
