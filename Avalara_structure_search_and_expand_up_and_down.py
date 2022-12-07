@@ -135,7 +135,6 @@ class Avalara_Listings:
         # convert to case insensitive strings
 
         parent_category_tax_list = []
-        parent_additional_tax_list = []
         count = 0
         for i in self.df.index:
             # if i > 1:
@@ -156,33 +155,20 @@ class Avalara_Listings:
                     curr_tax_list.append(word)
                 else:
                     continue
-            
-            curr_additional_word_list = []
-            if additional_tax_code_infomation == "nan":
-                pass
-            else:
-                s = re.findall(r'\w+', additional_tax_code_infomation) # regex expression to ignore any ascii values are not words
-                for word in s:
-                    if len(word) > 3:
-                        curr_additional_word_list.append(word)
-                    else:
-                        continue
 
             if i == 1: # special case (first parent category of tax code description)
                 parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-
             flag = 0 # flag used to determine whether all words in parent category present in the current listing description
             if (all(x in curr_tax_list for x in parent_category_tax_list)):
                 flag = 1
 
             if flag == 1: # current listing belongs to the current parent category
-                total_word_list = curr_tax_list + curr_additional_word_list + parent_additional_tax_list
+                total_word_list = curr_tax_list 
             else: # start to a new parent category
                 parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-                total_word_list = parent_category_tax_list + parent_additional_tax_list
+                total_word_list = parent_category_tax_list
                 count += 1
+                print(total_word_list)
                 
             self.map_ID_Keywords[tax_code_col] = total_word_list # add the valid listing to the map
 
