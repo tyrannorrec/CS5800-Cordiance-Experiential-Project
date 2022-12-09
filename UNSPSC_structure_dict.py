@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+import re
 
 
 class UNSPSC_Dict:
@@ -27,25 +28,28 @@ class UNSPSC_Dict:
 
         # Sorts string as list of words and returns as string.
         def sortStringLex(inStr):
-            strDataList = strData.split()
+            #strDataList = inStr.split()
+            strDataList = [*set(inStr)] # Removes duplicates
             strDataList.sort()
-            strData = ''
-            for word in strDataList:
-                strData = strData + ' ' + word
-            return strData
+            return strDataList
 
         # Extracts all text elements for item in UNSPSC file and outputs a string representing that item for hashing
         def getStringData(i):
             
             strData = ''
-            # strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
-            #                 lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
-            #                 lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
-            #                 lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
+            #strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
+            #                lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
+            #                lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
+            #                lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
             strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + 
                             lowerStr(self.df['Family Title'][i]) + ' ' + 
                             lowerStr(self.df['Class Title'][i]) + ' ' +
-                            lowerStr(self.df['Commodity Title'][i]))                
+                            lowerStr(self.df['Commodity Title'][i]))
+ 
+            strData = re.findall(r'\w+', strData)
+            for word in strData:
+                    if len(word) <= 3:
+                        strData.remove(word)                
             return sortStringLex(strData)
 
         # For each item in UNSPSC file, add item to dictionary where key = commodity ID and value = hash string for item
@@ -54,7 +58,7 @@ class UNSPSC_Dict:
             strData = getStringData(i)
             self.data[commodityID] = strData
 
-    def printDictionary(self):
+    def printDict(self):
 
         for key in self.data:
             print(key, '\t', self.data[key], '\n')

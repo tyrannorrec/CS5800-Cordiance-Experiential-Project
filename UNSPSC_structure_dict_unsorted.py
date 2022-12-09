@@ -45,7 +45,7 @@ class UNSPSC_Dict:
             strData = getStringData(i)
             self.data[commodityID] = strData
 
-    def printDictionary(self):
+    def printDict(self):
 
         for key in self.data:
             print(key, '\t', self.data[key], '\n')
