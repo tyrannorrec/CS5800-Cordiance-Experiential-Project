@@ -42,17 +42,20 @@ class string_to_int:
 
 # # UNSPSC_Tree = UNSPSC_structure.getTree()
 # # print(UNSPSC_Tree)
-# ava_words = ['digital', 'goods', 'digital', 'goods', 'generally', 'viewed', 'downloadable', 'items', 'that', 'sold', 'websites', 'that', 'otherwise', 'transferred', 'electronically', 'examples', 'would', 'include', 'computer', 'software', 'artwork', 'photographs', 'music', 'movies', 'files', 'books', 'pdfs', 'more', 'digital', 'goods', 'generally', 'viewed', 'downloadable', 'items', 'that', 'sold', 'websites', 'that', 'otherwise', 'transferred', 'electronically', 'examples', 'would', 'include', 'computer', 'software', 'artwork', 'photographs', 'music', 'movies', 'files', 'books', 'pdfs', 'more']
+ava_words = ['digital', 'goods', 'digital', 'goods', 'generally', 'viewed', 'downloadable', 'items', 'that', 'sold', 'websites', 'that', 'otherwise', 'transferred', 'electronically', 'examples', 'would', 'include', 'computer', 'software', 'artwork', 'photographs', 'music', 'movies', 'files', 'books', 'pdfs', 'more', 'digital', 'goods', 'generally', 'viewed', 'downloadable', 'items', 'that', 'sold', 'websites', 'that', 'otherwise', 'transferred', 'electronically', 'examples', 'would', 'include', 'computer', 'software', 'artwork', 'photographs', 'music', 'movies', 'files', 'books', 'pdfs', 'more']
+# ava_words = ['cloud', 'services', 'saas', 'service', 'agreement', 'business', 'only', 'only']
+# ava_words = ['digital', 'goods']
 # # UN = "cloudservicessaasserviceagreementdatabaseproductsforbusinessuseonly"
 # # *set() * is the unpack the list and each element is passed as different parameters.
 # # set will remove duplicates and using [] merge all the remaining elements to form a new list
-# ava_words_set = [*set(ava_words)]
+ava_words_set = [*set(ava_words)]
 # UN = "Cloud services - saas - service agreement - database products - for business use only"
-# count = 0
+UN = "Digital loop carrier DLCs Information Technology Broadcasting and Telecommunications Data Voice or Multimedia Network Equipment or Platforms and Accessories Telephony equipment"
+count = 0
 
-# xyz = string_to_int()
-# for item in ava_words_set:
-#     count += len(xyz.rabin_karp_helper(item, UN))
+xyz = string_to_int()
+for item in ava_words_set:
+    count += len(xyz.rabin_karp_helper(item, UN))
 
-# print(count)
+print(count)
 

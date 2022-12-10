@@ -123,7 +123,7 @@ class Avalara_Listings:
         # going through the avalara file line by line, pre-filter the keywords in description by length of 3
         # convert to case insensitive strings
         for i in self.df.index:
-            # if i > 300:
+            # if i > 5:
             #     break
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
@@ -163,7 +163,7 @@ class sub_category():
 
 
 def main():
-    ReadFile()
+    Ava_dict()
     
 
 if __name__ == "__main__":

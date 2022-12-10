@@ -145,8 +145,6 @@ class Avalara_Listings:
                 continue
 
             tax_code_description = str(self.df['AvaTax System Tax Code Description'][i]).lower()
-            additional_tax_code_infomation = str(self.df['Additional AvaTax System Tax Code Information'][i]).lower()
-
 
             curr_tax_list = []
             s = re.findall(r'\w+', tax_code_description) # regex expression to ignore any ascii values are not words
@@ -163,12 +161,18 @@ class Avalara_Listings:
                 flag = 1
 
             if flag == 1: # current listing belongs to the current parent category
-                total_word_list = curr_tax_list 
+                total_word_list = curr_tax_list  
             else: # start to a new parent category
+                if (len(curr_tax_list) > len(parent_category_tax_list)): # prepross
+                    temp = curr_tax_list
+                    curr_tax_list = parent_category_tax_list
+                    parent_category_tax_list = temp
+
+                if np.subtract(parent_category_tax_list - curr_tax_list):
+                    
                 parent_category_tax_list = curr_tax_list
                 total_word_list = parent_category_tax_list
                 count += 1
-                print(total_word_list)
                 
             self.map_ID_Keywords[tax_code_col] = total_word_list # add the valid listing to the map
 

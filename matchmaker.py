@@ -12,14 +12,14 @@ Avalara_dict = Avalara.Ava_dict().dict
 UNSPSC_data = UNSPSC_dict.data
 
 def main():
-
+    total_start = time.time()
     # UNSPSC_dict.printDict()
     print("matching begins......")
     rabinKarp = RK.string_to_int()
     output_dict = {}
     for k_ava, v_ava in Avalara_dict.items():
         start = time.time()
-        print(k_ava)
+        # print(k_ava)
         maxCount = 0
         commodityID = -1
         taxID = k_ava
@@ -35,17 +35,20 @@ def main():
                 maxCount = currCount
                 commodityID = currcommodityID
         
-        output_dict[taxID] = commodityID
+        output_dict[taxID] = [commodityID, strData]
         end = time.time()
         print(f"one matching takes {round(end - start, 2)} secs")
-        print(f"max count is {maxCount}")
+        # print(f"max count is {maxCount}")
+    total_end = time.time()
 
     print("matching ends......")
     f = open("proj_output.txt", "a")
 
     for k, v in output_dict.items():
-        f.write(str(k) + "is matching with " + str(v) + '\n')
+        f.write(str(k) + " is matching with " + str(v) + '\n')
+    f.write('\n' + str(round(total_end - total_start,2)) + "secs" + '\n')
     f.close()
+    
 
 if __name__ == "__main__":
     main()
