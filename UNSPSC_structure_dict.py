@@ -37,14 +37,14 @@ class UNSPSC_Dict:
         def getStringData(i):
             
             strData = ''
-            #strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
-            #                lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
-            #                lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
-            #                lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
-            strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + 
-                            lowerStr(self.df['Family Title'][i]) + ' ' + 
-                            lowerStr(self.df['Class Title'][i]) + ' ' +
-                            lowerStr(self.df['Commodity Title'][i]))
+            strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
+                            lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
+                            lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
+                            lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
+            #strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + 
+            #                lowerStr(self.df['Family Title'][i]) + ' ' + 
+            #                lowerStr(self.df['Class Title'][i]) + ' ' +
+            #                lowerStr(self.df['Commodity Title'][i]))
  
             strData = re.findall(r'\w+', strData)
             for word in strData:

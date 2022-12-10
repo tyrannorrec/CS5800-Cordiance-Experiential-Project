@@ -15,7 +15,9 @@ UNSPSC_data = UNSPSC_dict.data
 def sortedMatch():
 
     print(">> Beginning matching...")
+    timerMain = time.time()
     output_dict = {}
+
     for avaKey, avaVal in Avalara_dict.items():
         start = time.time()
         print(">>>> Matching ", avaKey, "...")
@@ -30,30 +32,31 @@ def sortedMatch():
             currTargetIndex = 0
             length = len(currTargetWordList)
             while currTargetIndex < length:
+                if len(avaWordList) < 1:
+                    break
                 for word in avaWordList:
                     while currTargetIndex < length:
                         if word == currTargetWordList[currTargetIndex]:
                             currCount += 1
+                            currTargetIndex += 1
                             break
-                        currTargetIndex += 1
-            #for word in avaWordList:
-            #    while currTargetIndex < length:
-            #        if word == currTargetWordList[currTargetIndex]:
-            #            currCount += 1
-            #        currTargetIndex += 1
+                        else:
+                            currTargetIndex += 1
             if currCount > maxCount:
                 maxCount = currCount
                 maxCommodityID = currCommodityID
                 
         print(avaTaxID, " matched with ", maxCommodityID)
-        output_dict[avaTaxID] = maxCommodityID
+        output_dict[avaTaxID] = [avaWordList, maxCommodityID]
         end = time.time()
         print(f">>>> Match took {round(end - start, 2)} seconds.")
 
     print(">> Matching ended.")
+    timerMainEnd = time.time()
+    print(f">> Process took {round(timerMainEnd - timerMain, 2)} seconds.")
     fileHandle = open("proj_output.txt", "a")
     for key, value in output_dict.items():
-        fileHandle.write(str(key) + " was matched with " + str(value) + '\n')
+        fileHandle.write(str(key) + " " + str(value[0]) + " was matched with " + str(value[1]) + '\n')
     fileHandle.close()
 
 
