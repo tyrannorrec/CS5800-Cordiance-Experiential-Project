@@ -138,8 +138,8 @@ class Avalara_Listings:
         parent_additional_tax_list = []
         count = 0
         for i in self.df.index:
-            if i > 1:
-                break
+            # if i > 1:
+            #     break
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
             if tax_code_col[-1] > '9' or tax_code_col[-1] < '0': # Skip invalid tax code
