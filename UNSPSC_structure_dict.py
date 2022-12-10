@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 import re
+import math
 
 
 class UNSPSC_Dict:
@@ -10,7 +11,7 @@ class UNSPSC_Dict:
         self.df = inDataFrame
         self.data = {}
 
-        print('>> Building UNSPSC hashmap...')
+        print('>> Building UNSPSC dictionary...')
         start = time.time()
         self.build()
         print('>>>> Build complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
@@ -55,8 +56,9 @@ class UNSPSC_Dict:
         # For each item in UNSPSC file, add item to dictionary where key = commodity ID and value = hash string for item
         for i in self.df.index:
             commodityID = self.df['Commodity'][i]
-            strData = getStringData(i)
-            self.data[commodityID] = strData
+            if not math.isnan(commodityID):
+                strData = getStringData(i)
+                self.data[int(commodityID)] = strData
 
     def printDict(self):
 

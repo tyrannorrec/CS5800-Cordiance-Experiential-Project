@@ -1,23 +1,24 @@
 import pandas as pd
+# import UNSPSC_structure_dict_unsorted as UNSPSC
 import UNSPSC_structure_dict as UNSPSC
 # import Avalara_structure as Avalara
 # import Avalara_structure_only_2nd_column as Avalara
 import Avalara_structure_titles_only_sorted as Avalara
-import Rabin_Karp_match as RK
 import time
 
-
+# Global variables
 UNSPSC_dict = UNSPSC.getDict()
-Avalara_dict = Avalara.Ava_dict().dict
-
+Avalara_dict = Avalara.Ava_Dict().dict
 UNSPSC_data = UNSPSC_dict.data
 
+# Final version -- assumes input word lists are both sorted lexicographically
 def sortedMatch():
 
     print(">> Beginning matching...")
     timerMain = time.time()
     output_dict = {}
 
+    # For every key-value pair in Avalara dict
     for avaKey, avaVal in Avalara_dict.items():
         start = time.time()
         print(">>>> Matching ", avaKey, "...")
@@ -25,23 +26,31 @@ def sortedMatch():
         maxCommodityID = -1
         avaTaxID = avaKey
         avaWordList = avaVal
+
+        # Check every UNSPSC item
         for targetKey, targetVal in UNSPSC_data.items():
             currCount = 0
             currCommodityID = targetKey
             currTargetWordList = targetVal
             currTargetIndex = 0
             length = len(currTargetWordList)
-            while currTargetIndex < length:
+
+            # Iterate through word list of every UNSPSC item. 
+            avaIndex = 0
+            while currTargetIndex < length and avaIndex < len(avaWordList):
                 if len(avaWordList) < 1:
                     break
-                for word in avaWordList:
+                while avaIndex < len(avaWordList):
                     while currTargetIndex < length:
-                        if word == currTargetWordList[currTargetIndex]:
+                        if avaWordList[avaIndex] == currTargetWordList[currTargetIndex]:
                             currCount += 1
                             currTargetIndex += 1
                             break
-                        else:
+                        elif avaWordList[avaIndex] > currTargetWordList[currTargetIndex]:
                             currTargetIndex += 1
+                        else:
+                            break
+                    avaIndex += 1
             if currCount > maxCount:
                 maxCount = currCount
                 maxCommodityID = currCommodityID
@@ -60,11 +69,51 @@ def sortedMatch():
     fileHandle.close()
 
 
+# Deprecated -- Rabin Karp hashing algorithm for matching a word (pattern) to a string (text)
+def rabinKarp(pattern, text):
+
+    d = 26 # a b c ... z
+    q = 5381 # large prime number
+    m = len(pattern)
+    n = len(text)
+    p = 0 # hash for pattern
+    t = 0 # hash for text
+    h = 1
+    i = 0
+    j = 0
+        
+    res = []
+        
+    for i in range(m-1):
+        h = (h*d) % q
+        
+    for i in range(m):
+        p = (d*p + ord(pattern[i])) % q
+        t = (d*t + ord(text[i])) % q
+        
+    for i in range(n-m+1):
+        if p == t:
+            for j in range(m):
+                if text[i+j] != pattern[j]:
+                    break
+            j += 1
+            if j == m:
+                res.append(i)
+            
+        if i < n-m:
+            t = (d*(t-ord(text[i])*h) + ord(text[i+m])) % q
+                
+            if t < 0:
+                t = t + q
+                    
+    return res
+
+
+# Deprecated
 def rabinKarpMatch():
 
     # UNSPSC_dict.printDict()
     print("matching begins......")
-    rabinKarp = RK.string_to_int()
     output_dict = {}
     for k_ava, v_ava in Avalara_dict.items():
         start = time.time()
@@ -79,7 +128,7 @@ def rabinKarpMatch():
             strData = v_UN
             # print(currcommodityID)
             for word in taxWordList:
-                currCount += len(rabinKarp.rabin_karp_helper(word, strData))
+                currCount += len(rabinKarp(word, strData))
             if currCount > maxCount:
                 maxCount = currCount
                 commodityID = currcommodityID
@@ -90,11 +139,11 @@ def rabinKarpMatch():
         print(f"max count is {maxCount}")
 
     print("matching ends......")
-    f = open("proj_output.txt", "a")
+    fileHandle = open("proj_output.txt", "a")
 
     for k, v in output_dict.items():
-        f.write(str(k) + "is matching with " + str(v) + '\n')
-    f.close()
+        fileHandle.write(str(k) + "is matching with " + str(v) + '\n')
+    fileHandle.close()
 
 
 def main():
