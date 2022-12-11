@@ -2,7 +2,6 @@ import pandas as pd
 # import UNSPSC_structure_dict_unsorted as UNSPSC
 import UNSPSC_structure_dict as UNSPSC
 # import Avalara_structure as Avalara
-# import Avalara_structure_only_2nd_column as Avalara
 import Avalara_structure_titles_only_sorted as Avalara
 import time
 
@@ -145,10 +144,8 @@ def rabinKarpMatch():
         fileHandle.write(str(k) + "is matching with " + str(v) + '\n')
     fileHandle.close()
 
-
 def main():
     sortedMatch()
-
 
 if __name__ == "__main__":
     main()
