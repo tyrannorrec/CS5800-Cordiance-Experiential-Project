@@ -1,0 +1,124 @@
+D0000000 ['digital', 'goods'] was matched with 41111907.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with -1
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with nan
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 41111907.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 41112104.0
+DA040100 ['radio', 'subscriptions'] was matched with -1
+DA050000 ['audio', 'digital', 'works'] was matched with 41112104.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 41112104.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 41112104.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 41112104.0
+D0000000 ['digital', 'goods'] was matched with 41111907.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with -1
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with nan
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 41111907.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 41112104.0
+DA040100 ['radio', 'subscriptions'] was matched with -1
+DA050000 ['audio', 'digital', 'works'] was matched with 41112104.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 41112104.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 41112104.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 41112104.0
+D0000000 ['digital', 'goods'] was matched with 41111907.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with -1
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with nan
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 41111907.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 41112104.0
+DA040100 ['radio', 'subscriptions'] was matched with -1
+DA050000 ['audio', 'digital', 'works'] was matched with 41112104.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 41112104.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 41112104.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 41112104.0
+D0000000 ['digital', 'goods'] was matched with 41111907.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with -1
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with nan
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 41111907.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 41112104.0
+DA040100 ['radio', 'subscriptions'] was matched with -1
+DA050000 ['audio', 'digital', 'works'] was matched with 41112104.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 41112104.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 41112104.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 41112104.0
+D0000000 ['digital', 'goods'] was matched with 41111907.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with -1
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with nan
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 41111907.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 41112104.0
+DA040100 ['radio', 'subscriptions'] was matched with -1
+DA050000 ['audio', 'digital', 'works'] was matched with 41112104.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 41112104.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 41112104.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 41112104.0
+D0000000 ['digital', 'goods'] was matched with 14111538.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 64111703.0
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with 82121503.0
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 14111538.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 32101651.0
+DA040100 ['radio', 'subscriptions'] was matched with 25111536.0
+DA050000 ['audio', 'digital', 'works'] was matched with 32101651.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 32101651.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 20111701.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 43211604.0
+D0000000 ['digital', 'goods'] was matched with 14111538.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 64111703.0
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with 82121503.0
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 14111538.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 32101651.0
+DA040100 ['radio', 'subscriptions'] was matched with 25111536.0
+DA050000 ['audio', 'digital', 'works'] was matched with 32101651.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 32101651.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 20111701.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 43211604.0
+D0000000 ['digital', 'goods'] was matched with 14111538.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 64111703.0
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with 82121503.0
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 14111538.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 32101651.0
+DA040100 ['radio', 'subscriptions'] was matched with 25111536.0
+DA050000 ['audio', 'digital', 'works'] was matched with 32101651.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 32101651.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 20111701.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 43211604.0
+D0000000 ['digital', 'goods'] was matched with nan
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 31201530.0
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with 43211621.0
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 43201810.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 43202001.0
+DA040100 ['radio', 'subscriptions'] was matched with 25111536.0
+DA050000 ['audio', 'digital', 'works'] was matched with 32101651.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 43212108.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 43201828.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 43211604.0
+D0000000 ['digital', 'goods'] was matched with nan
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with nan
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with 43201810.0
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 43201810.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 43201810.0
+DA040100 ['radio', 'subscriptions'] was matched with 26121507.0
+DA050000 ['audio', 'digital', 'works'] was matched with 32101651.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 32101651.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 32101651.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with nan
+D0000000 ['digital', 'goods'] was matched with nan
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 31201530.0
+DA010000 ['advertising', 'digital', 'goods', 'material', 'media', 'only', 'physical'] was matched with 43211621.0
+DA030000 ['digital', 'goods', 'media', 'only', 'physical'] was matched with 43201810.0
+DA040000 ['audio', 'digital', 'goods', 'media', 'only', 'physical'] was matched with 43202001.0
+DA040100 ['radio', 'subscriptions'] was matched with 25111536.0
+DA050000 ['audio', 'digital', 'works'] was matched with 32101651.0
+DA051011 ['audio', 'digital', 'permanent', 'rights', 'sold', 'user', 'with', 'works'] was matched with 43212108.0
+DA051012 ['audio', 'conditioned', 'continued', 'digital', 'payments', 'rights', 'with', 'works'] was matched with 43201828.0
+DA051013 ['audio', 'digital', 'other', 'sold', 'than', 'user', 'users', 'works'] was matched with 43211604.0
+D0000000 ['digital', 'goods'] was matched with nan
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 31201530.0
+D0000000 ['digital', 'goods'] was matched with nan
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 31201530.0
+D0000000 ['digital', 'goods'] was matched with 95141706.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 95141706.0
+D0000000 ['digital', 'goods'] was matched with 95141706.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 95141706.0
+D0000000 ['digital', 'goods'] was matched with nan
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 31201530.0
+D0000000 ['digital', 'goods'] was matched with ['accessories', 'also', 'animal', 'animals', 'care', 'containment', 'domesticated', 'equipment', 'feeding', 'goods', 'harness', 'includes', 'live', 'material', 'materials', 'plant', 'plants', 'saddlery', 'seeds', 'segment', 'supplies', 'the', 'this', 'used', 'wild']
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with ['abrasives', 'adhesion', 'adhesive', 'adhesives', 'air', 'also', 'aluminum', 'bearings', 'between', 'bushings', 'cases', 'castings', 'coated', 'commonly', 'components', 'conditioning', 'construction', 'consumed', 'duct', 'dyes', 'extrusions', 'fasteners', 'fastening', 'finishes', 'foil', 'forgings', 'gaskets', 'gears', 'goods', 'in', 'includes', 'industrial', 'made', 'manufacturing', 'objects', 'paints', 'permanent', 'primers', 'processes', 'sealants', 'seals', 'segment', 'solvents', 'some', 'springs', 'sprockets', 'such', 'supplies', 'tape', 'temporary', 'this', 'used', 'well', 'wheels', 'work']
+D0000000 ['digital', 'goods'] was matched with 10141501.0
+D9999999 ['default', 'digital', 'goods', 'taxable', 'temporary', 'unmapped'] was matched with 31201530.0
