@@ -41,7 +41,7 @@ class UNSPSC_Dict:
             strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
                             lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
                             lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
-                            lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
+                            lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]))
             #strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + 
             #                lowerStr(self.df['Family Title'][i]) + ' ' + 
             #                lowerStr(self.df['Class Title'][i]) + ' ' +
@@ -49,8 +49,8 @@ class UNSPSC_Dict:
  
             strData = re.findall(r'\w+', strData)
             for word in strData:
-                    if len(word) <= 3:
-                        strData.remove(word)                
+                if len(word) <= 3:
+                    strData.remove(word)
             return sortStringLex(strData)
 
         # For each item in UNSPSC file, add item to dictionary where key = commodity ID and value = hash string for item
