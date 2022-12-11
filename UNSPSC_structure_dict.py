@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 import re
+import math
 
 
 class UNSPSC_Dict:
@@ -10,7 +11,7 @@ class UNSPSC_Dict:
         self.df = inDataFrame
         self.data = {}
 
-        print('>> Building UNSPSC hashmap...')
+        print('>> Building UNSPSC dictionary...')
         start = time.time()
         self.build()
         print('>>>> Build complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
@@ -40,7 +41,7 @@ class UNSPSC_Dict:
             strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + lowerStr(self.df['Segment Definition'][i]) + ' ' + 
                             lowerStr(self.df['Family Title'][i]) + ' ' + lowerStr(self.df['Family Definition'][i]) + ' ' + 
                             lowerStr(self.df['Class Title'][i]) + ' ' + lowerStr(self.df['Class Definition'][i]) + ' ' +
-                            lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]) + ' ')
+                            lowerStr(self.df['Commodity Title'][i]) + ' ' + lowerStr(self.df['Definition'][i]))
             #strData = (strData + lowerStr(self.df['Segment Title'][i]) + ' ' + 
             #                lowerStr(self.df['Family Title'][i]) + ' ' + 
             #                lowerStr(self.df['Class Title'][i]) + ' ' +
@@ -48,15 +49,16 @@ class UNSPSC_Dict:
  
             strData = re.findall(r'\w+', strData)
             for word in strData:
-                    if len(word) <= 3:
-                        strData.remove(word)                
+                if len(word) <= 3:
+                    strData.remove(word)
             return sortStringLex(strData)
 
         # For each item in UNSPSC file, add item to dictionary where key = commodity ID and value = hash string for item
         for i in self.df.index:
             commodityID = self.df['Commodity'][i]
-            strData = getStringData(i)
-            self.data[commodityID] = strData
+            if not math.isnan(commodityID):
+                strData = getStringData(i)
+                self.data[int(commodityID)] = strData
 
     def printDict(self):
 

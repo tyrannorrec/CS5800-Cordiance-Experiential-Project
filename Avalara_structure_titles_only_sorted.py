@@ -1,130 +1,58 @@
-import numpy as np
 import pandas as pd
-import os 
 import re
 import time
 
-class Ava_dict:
+class Ava_Dict:
 
-    # initialize a map to store the taxid and its corresponding valid key words
+    # Initializes a dictionary where key = tax ID and value = list of key words
     def __init__(self):
-        self.dict = {}
-        # self.manual_display()
+        self.data = {}
+        self.results = None
         self.read()
 
-    # interactive display interface
-    def manual_display(self):
-
-        print("What would you like to do? \n") 
-        
-        options = int(input("1. Peek a file. \n" +
-                            "2. Read a file. \n" +
-                            "3. Write map to file.\n" +
-                            "4. Nothing, quit the program. \n:"))
-
-        
-        match options:
-            case 1:
-                print("Available file to read in: ")
-                self.peek()
-                self.manual_display()
-
-            case 2:
-                self.read()
-                print(f"Total {len(self.dict)} entries")
-                self.manual_display()
-
-            case 3:
-                self.write()
-                self.manual_display()
-
-            case 4:
-                print("bye")
-                return
-                    
-            case _:
-                print("Invalid input, try again...")
-                return
-
-    # Peek the information of a valid data input file within the current working directory
-    def peek(self):
-        x = os.listdir('./')
-        available_file_input = {}
-        
-        count = 1
-        for file in x:
-            if file.endswith('.xlsx') and file[0].isalpha:
-                available_file_input[count] = file
-                count += 1
-
-        # listing the available files to read        
-        print("******************************************************************")
-        for k,v in available_file_input.items():
-            print(f"{k}: {v}")
-        print("******************************************************************")
-
-        # prompt user to choose file to read
-        file_index = int(input("\nWhich file would you like to read?\n" +
-                                   "Note: Only input the list number of file you want to read in.\n:"))  
-
-        # file index must be valid
-        try:
-
-            xls = pd.ExcelFile(available_file_input[file_index])
-            sheet_count = 1
-            available_sheets = {}
-            for sheet in xls.sheet_names:
-                available_sheets[sheet_count] = sheet
-                sheet_count += 1
-
-            print(f"Available sheets in {available_file_input[file_index]} are \n{available_sheets}\n")
-            
-        except:
-            print("Not a valid input, try agian....\n")
-            time.sleep(0.5) # sleep for 1 second
-            self.peek()
-
-    # Read the input file and print the ds
+    # Reads Avalara data frame into self.dict
     def read(self):
+
         start = time.time()
+        print('>> Building Avalara dictionary...')
         df_ava = pd.read_excel('Avalara_goods_and_services.xlsx', 
                     'goods_and_services',
                     skiprows=1)
 
-        build_map = Avalara_Listings(df_ava)
+        builder = Avalara_Dict_Builder(df_ava)
+        self.data = builder.build()
+        #self.results = builder.results
 
-        self.dict = build_map.build()
-        self.print()
-        end = time.time()
-        print(f"{round(end - start, 2)} secs")
-
-    # Write to a csv file with all map information
-    def write(self):
-        print("Write successfully.\n")
-    # print function to print the self.dict line by line
+        #self.print()
+        print('>>>> Build complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
+    
+    # Prints self.dict contents
     def print(self):
-        for k,v in self.dict.items():
+        for k,v in self.data.items():
             print(f"{k}: {v}")
 
 
-# Init data structure, not fully implemented yet
-class Avalara_Listings:
+# Utility class to build dictionary of Avalara items
+class Avalara_Dict_Builder:
 
     def __init__(self, df):
         self.df = df
         self.map_ID_Keywords = {}
-        # self.root_category = []
+        #self.results = None
 
     def build(self):    
-        
-        # TODO:
-        # currTopTaxCode, currSubTaxCode = "", ""
 
-        # going through the avalara file line by line, pre-filter the keywords in description by length of 3
+        # Declare pandas data frame to store results
+        #self.results = pd.DataFrame(columns = ['Ava Tax Code', 'Ava Description', 'Commodity ID'])
+        #self.results.set_index(['Ava Tax Code'], inplace = True)
+
+        # Going through the avalara file line by line, pre-filter the keywords in description by length of 3
         # convert to case insensitive strings
         for i in self.df.index:
-            # if i > 300:
-            #     break
+
+            if i > 10:
+                break
+
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
             if tax_code_col[-1] > '9' or tax_code_col[-1] < '0': # Skip invalid tax code
@@ -144,28 +72,9 @@ class Avalara_Listings:
             curr_tax_list.sort()
             
             self.map_ID_Keywords[tax_code_col] = curr_tax_list # add the valid listing to the map
+            #newFrame = pd.DataFrame(columns = {'Ava Tax Code': tax_code_col, 'Ava Description': tax_code_description})
+            #newFrame.set_index('Ava Tax Code', inplace = True)
+            #self.results = pd.concat([self.results, newFrame])
+            #self.results.loc[len(self.results.index)] = [tax_code_col, tax_code_description, float('Nan')]
 
-            # if i > 5:
-            #     return self.map_ID_Keywords
         return self.map_ID_Keywords
-
-         
-# TODO: 
-class top_category():
-
-
-    def __init__(self):
-        pass
-# TODO:
-class sub_category():
-
-    def __init__(self):
-        pass
-
-
-def main():
-    ReadFile()
-    
-
-if __name__ == "__main__":
-    main()
