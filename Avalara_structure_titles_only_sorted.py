@@ -1,5 +1,4 @@
 import pandas as pd
-import os 
 import re
 import time
 
@@ -7,7 +6,8 @@ class Ava_Dict:
 
     # Initializes a dictionary where key = tax ID and value = list of key words
     def __init__(self):
-        self.dict = {}
+        self.data = {}
+        self.results = None
         self.read()
 
     # Reads Avalara data frame into self.dict
@@ -20,14 +20,15 @@ class Ava_Dict:
                     skiprows=1)
 
         builder = Avalara_Dict_Builder(df_ava)
-        self.dict = builder.build()
+        self.data = builder.build()
+        #self.results = builder.results
 
         #self.print()
         print('>>>> Build complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
     
     # Prints self.dict contents
     def print(self):
-        for k,v in self.dict.items():
+        for k,v in self.data.items():
             print(f"{k}: {v}")
 
 
@@ -37,18 +38,21 @@ class Avalara_Dict_Builder:
     def __init__(self, df):
         self.df = df
         self.map_ID_Keywords = {}
-        # self.root_category = []
+        #self.results = None
 
     def build(self):    
-        
-        # TODO:
-        # currTopTaxCode, currSubTaxCode = "", ""
 
-        # going through the avalara file line by line, pre-filter the keywords in description by length of 3
+        # Declare pandas data frame to store results
+        #self.results = pd.DataFrame(columns = ['Ava Tax Code', 'Ava Description', 'Commodity ID'])
+        #self.results.set_index(['Ava Tax Code'], inplace = True)
+
+        # Going through the avalara file line by line, pre-filter the keywords in description by length of 3
         # convert to case insensitive strings
         for i in self.df.index:
-            # if i > 300:
-            #     break
+
+            if i > 10:
+                break
+
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
             if tax_code_col[-1] > '9' or tax_code_col[-1] < '0': # Skip invalid tax code
@@ -68,5 +72,9 @@ class Avalara_Dict_Builder:
             curr_tax_list.sort()
             
             self.map_ID_Keywords[tax_code_col] = curr_tax_list # add the valid listing to the map
+            #newFrame = pd.DataFrame(columns = {'Ava Tax Code': tax_code_col, 'Ava Description': tax_code_description})
+            #newFrame.set_index('Ava Tax Code', inplace = True)
+            #self.results = pd.concat([self.results, newFrame])
+            #self.results.loc[len(self.results.index)] = [tax_code_col, tax_code_description, float('Nan')]
 
         return self.map_ID_Keywords
