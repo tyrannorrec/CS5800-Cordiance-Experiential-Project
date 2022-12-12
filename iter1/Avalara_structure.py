@@ -4,13 +4,14 @@ import os
 import re
 import time
 
+
 class Ava_Dict:
 
     # initialize a map to store the taxid and its corresponding valid key words
     def __init__(self):
         self.dict = {}
-        # self.manual_display()
-        self.read()
+        self.solution = None
+        #self.manual_display()
 
     # interactive display interface
     def manual_display(self):
@@ -85,7 +86,6 @@ class Ava_Dict:
             self.peek()
 
     # Read the input file and print the ds
-
     def read(self):   
             
         print('>> Converting Avalara file to data frame...')
@@ -98,24 +98,17 @@ class Ava_Dict:
         print('>> Building Avalara hash map...')
         start = time.time()
         build_map = Avalara_Listings(df_ava)
-
-        self.dict = build_map.build()
-        self.print()
-        end = time.time()
-        print(f"{round(end - start, 2)} secs")
-
+        self.dict, self.solution = build_map.build()
+        print('>>>> Build complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
+        #self.print()
 
     # Write to a csv file with all map information
     def write(self):
         print("Write successfully.\n")
     # print function to print the self.dict line by line
     def print(self):
-        pass
-        # f = open("ava_output.txt", "a")
-        # for k,v in self.dict.items():
-        #     f.write(str(k) + ':' + str(v) + '\n')
-        #     print(f"{k}: {v}")
-        # f.close()
+        for k,v in self.dict.items():
+            print(f"{k}: {v}")
 
 
 # Init data structure, not fully implemented yet
@@ -134,64 +127,30 @@ class Avalara_Listings:
         # going through the avalara file line by line, pre-filter the keywords in description by length of 3
         # convert to case insensitive strings
 
-        parent_category_tax_list = []
-        parent_additional_tax_list = []
-        count = 0
+        solution = MatchResults()
+
         for i in self.df.index:
-            # if i > 1:
-            #     break
             tax_code_col = str(self.df['AvaTax System Tax Code'][i])
             
             if tax_code_col[-1] > '9' or tax_code_col[-1] < '0': # Skip invalid tax code
                 continue
+            tax_code_description = str(self.df['AvaTax System Tax Code Description'][i])
+            solution.add(tax_code_col, tax_code_description)
+            tax_code_description = tax_code_description.lower()
 
-            tax_code_description = str(self.df['AvaTax System Tax Code Description'][i]).lower()
-            additional_tax_code_infomation = str(self.df['Additional AvaTax System Tax Code Information'][i]).lower()
-
-
-            curr_tax_list = []
+            word_list = []
             s = re.findall(r'\w+', tax_code_description) # regex expression to ignore any ascii values are not words
             for word in s:
                 if len(word) > 3:
-                    curr_tax_list.append(word)
+                    word_list.append(word)
                 else:
                     continue
             
-            curr_additional_word_list = []
-            if additional_tax_code_infomation == "nan":
-                pass
-            else:
-                s = re.findall(r'\w+', additional_tax_code_infomation) # regex expression to ignore any ascii values are not words
-                for word in s:
-                    if len(word) > 3:
-                        curr_additional_word_list.append(word)
-                    else:
-                        continue
-
-            if i == 1: # special case (first parent category of tax code description)
-                parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-
-            flag = 0 # flag used to determine whether all words in parent category present in the current listing description
-            if (all(x in curr_tax_list for x in parent_category_tax_list)):
-                flag = 1
-
-            if flag == 1: # current listing belongs to the current parent category
-                total_word_list = curr_tax_list + curr_additional_word_list + parent_additional_tax_list
-            else: # start to a new parent category
-                parent_category_tax_list = curr_tax_list
-                parent_additional_tax_list = curr_additional_word_list
-                total_word_list = parent_category_tax_list + parent_additional_tax_list
-                count += 1
-                
-            self.map_ID_Keywords[tax_code_col] = total_word_list # add the valid listing to the map
+            self.map_ID_Keywords[tax_code_col] = word_list # add the valid listing to the map
 
             # if i > 5:
-
-            #     return self.map_ID_Keywords
-        print(f"parent node count is {count}")
-        return self.map_ID_Keywords
-
+            #     return map_ID_Keywords
+        return self.map_ID_Keywords, solution
 
             # TODO: implement ds to store all information of each listing
 
@@ -245,7 +204,9 @@ class MatchResults:
         fileHandle.close()
 
 def main():
+
     Ava_Dict()
+
     
 
 if __name__ == "__main__":
