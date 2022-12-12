@@ -55,7 +55,7 @@ def getDict():
 
     print('\n>> Converting UNSPSC file to data frame...')
     start = time.time()
-    UNSPSC_df = pd.read_excel('UNSPSC_English_excel.xlsx', 'UNSPSC_English_excel', usecols=[0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14], skiprows=9)
+    UNSPSC_df = pd.read_excel('../UNSPSC_English_excel.xlsx', 'UNSPSC_English_excel', usecols=[0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14], skiprows=9)
     print('>>>> Conversion complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
 
     return UNSPSC_Dict(UNSPSC_df)

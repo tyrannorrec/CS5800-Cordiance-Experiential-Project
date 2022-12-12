@@ -1,6 +1,6 @@
 import pandas as pd
 # import UNSPSC_structure_dict_unsorted as UNSPSC
-import iter4.UNSPSC_structure_dict as UNSPSC
+import UNSPSC_structure_dict as UNSPSC
 # import Avalara_structure as Avalara
 import Avalara_structure_titles_only_sorted as Avalara
 import time
@@ -77,7 +77,7 @@ def sortedMatch():
     print(f">> Process took {round(time.time() - startAll, 2)} seconds.")
 
     # Write results to output file
-    fileHandle = open("proj_output.txt", "a")
+    fileHandle = open("../results/restuls_iter3.txt", "a")
     for key, value in output_dict.items():
         fileHandle.write(str(key) + " " + str(value[0]) + " was matched with " + str(value[1]) + '\n')
     #fileHandle.write(res.to_string())

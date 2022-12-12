@@ -150,7 +150,7 @@ def getTree():
 
     print('\n>> Converting UNSPSC file to data frame...')
     start = time.time()
-    UNSPSC_df = pd.read_excel('UNSPSC_English_excel.xlsx', 'UNSPSC_English_excel', skiprows=9)
+    UNSPSC_df = pd.read_excel('../UNSPSC_English_excel.xlsx', 'UNSPSC_English_excel', skiprows=9)
     print('>>>> Conversion complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
 
     return UNSPSC_Tree(UNSPSC_df)

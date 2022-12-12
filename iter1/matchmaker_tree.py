@@ -3,7 +3,7 @@ import UNSPSC_structure_tree
 import time
 
 UNSPSC_tree = UNSPSC_structure_tree.getTree()
-Avalara_utility = Avalara_structure.ReadFile()
+Avalara_utility = Avalara_structure.Ava_Dict()
 Avalara_utility.read()
 AvalaraDict, matchSolution = Avalara_utility.dict, Avalara_utility.solution
 

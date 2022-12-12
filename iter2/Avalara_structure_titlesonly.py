@@ -4,11 +4,11 @@ import os
 import re
 import time
 
-class Ava_dict:
+class Ava_Dict:
 
     # initialize a map to store the taxid and its corresponding valid key words
     def __init__(self):
-        self.dict = {}
+        self.data= {}
         # self.manual_display()
         self.read()
 
@@ -90,7 +90,7 @@ class Ava_dict:
             
         print('>> Converting Avalara file to data frame...')
         start = time.time()
-        df_ava = pd.read_excel('Avalara_goods_and_services.xlsx', 
+        df_ava = pd.read_excel('../Avalara_goods_and_services.xlsx', 
                     'goods_and_services',
                     skiprows=1)
         print('>>>> Conversion complete. Process took %s seconds.\n' % (round((time.time() - start), 2)))
@@ -238,7 +238,7 @@ class MatchResults:
             print(key, '\t', self.resultsDict[key])
 
     def writeToFile(self):
-        with open('/Users/norrecnieh/Documents/Align/CS5800/CS5800-Cordiance-Experiential-Project/results.txt', 'w') as fileHandle:
+        with open('../results/iter2_title_results.txt', 'w') as fileHandle:
             for key in self.resultsDict:
                 fileHandle.write(key)
                 fileHandle.write('\t')
@@ -249,7 +249,7 @@ class MatchResults:
         fileHandle.close()
 
 def main():
-    Ava_dict()
+    Ava_Dict()
     
 
 if __name__ == "__main__":

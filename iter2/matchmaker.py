@@ -79,7 +79,7 @@ def rabinKarpMatch():
         print(f"max count is {maxCount}")
 
     print("matching ends......")
-    fileHandle = open("proj_output.txt", "a")
+    fileHandle = open("../results/iter2_results.txt", "a")
 
     for k, v in output_dict.items():
         fileHandle.write(str(k) + "is matching with " + str(v) + '\n')

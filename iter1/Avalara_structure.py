@@ -4,7 +4,7 @@ import os
 import re
 import time
 
-class Ava_dict:
+class Ava_Dict:
 
     # initialize a map to store the taxid and its corresponding valid key words
     def __init__(self):
@@ -234,7 +234,7 @@ class MatchResults:
             print(key, '\t', self.resultsDict[key])
 
     def writeToFile(self):
-        with open('/Users/norrecnieh/Documents/Align/CS5800/CS5800-Cordiance-Experiential-Project/results.txt', 'w') as fileHandle:
+        with open('../results/iter1_results.txt', 'w') as fileHandle:
             for key in self.resultsDict:
                 fileHandle.write(key)
                 fileHandle.write('\t')
@@ -245,7 +245,7 @@ class MatchResults:
         fileHandle.close()
 
 def main():
-    Ava_dict()
+    Ava_Dict()
     
 
 if __name__ == "__main__":

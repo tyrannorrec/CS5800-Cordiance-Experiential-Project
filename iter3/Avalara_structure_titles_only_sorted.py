@@ -15,7 +15,7 @@ class Ava_Dict:
 
         start = time.time()
         print('>> Building Avalara dictionary...')
-        df_ava = pd.read_excel('Avalara_goods_and_services.xlsx', 
+        df_ava = pd.read_excel('../Avalara_goods_and_services.xlsx', 
                     'goods_and_services',
                     skiprows=1)
 
